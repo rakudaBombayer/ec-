@@ -100,6 +100,7 @@
             <div class="registered-product">
                 <h3>(登録・変更)された商品情報</h3>
                 <p><strong>商品名：</strong> ${registeredShohin.shouhinMei}</p>
+                <p><strong>商品カテゴリ：</strong> ${registeredShohin.categoryName}</p>
                 <p><strong>商品説明：</strong> ${registeredShohin.shouhinSetsumei}</p>
                 <p><strong>価格：</strong> ¥${registeredShohin.kakaku}</p>
                 <p><strong>在庫数量：</strong> ${registeredShohin.zaikoSuuryou} 個</p>
@@ -130,6 +131,14 @@
 
         <label>新しい商品名</label>
         <input type="text" name="shouhinMei">
+        
+        <label>商品カテゴリ</label>
+        <select name="shouhinCategory" required>
+    		<option value="">-- 全て --</option>
+				<option value="バイク１">バイク１</option>
+				<option value="ガンダム">ガンダム</option>
+				<option value="書籍">書籍</option>
+		</select>
 
         <label>新しい商品説明</label>
         <input type="text" name="shouhinSetsumei">

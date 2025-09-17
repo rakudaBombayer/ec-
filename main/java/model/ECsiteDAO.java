@@ -118,13 +118,14 @@ public class ECsiteDAO {
         return null; // 取得できなかった場合
     }
  // 商品追加
-    public boolean insertShohin(String name, String desc, int price, int stock,  String image) {
-    	String sql = "INSERT INTO shohin (shouhin_mei, shouhin_setsumei, kakaku, zaiko_suuryou,  shouhin_gazou) " +
-                "VALUES (?, ?, ?, ?, ?)";
+    public boolean insertShohin(String name, String category, String desc, int price, int stock,  String image) {
+    	String sql = "INSERT INTO shohin (shouhin_mei, category_name, shouhin_setsumei, kakaku, zaiko_suuryou,  shouhin_gazou) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
         	System.out.println("DB接続成功");
             System.out.println("name: " + name);
+            System.out.println("name: " + category);
             System.out.println("desc: " + desc);
             System.out.println("price: " + price);
             System.out.println("stock: " + stock);
@@ -133,10 +134,11 @@ public class ECsiteDAO {
         	
         	
             stmt.setString(1, name);
-            stmt.setString(2, desc);
-            stmt.setInt(3, price);
-            stmt.setInt(4, stock);
-            stmt.setString(5, image);
+            stmt.setString(2, category);
+            stmt.setString(3, desc);
+            stmt.setInt(4, price);
+            stmt.setInt(5, stock);
+            stmt.setString(6, image);
             
             //お試し
             int rows = stmt.executeUpdate();
@@ -152,15 +154,16 @@ public class ECsiteDAO {
 
     // 商品更新
     public boolean updateShohin(Shohin shohin, String oldShouhinMei) {
-        String sql = "UPDATE shohin SET shouhin_mei = ?, shouhin_setsumei = ?, kakaku = ?, zaiko_suuryou = ?, shouhin_gazou = ? WHERE shouhin_mei = ?";
+        String sql = "UPDATE shohin SET shouhin_mei = ?, category_name = ?,  shouhin_setsumei = ?, kakaku = ?, zaiko_suuryou = ?, shouhin_gazou = ? WHERE shouhin_mei = ?";
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, shohin.getShouhinMei());
-            stmt.setString(2, shohin.getShouhinSetsumei());
-            stmt.setInt(3, shohin.getKakaku());
-            stmt.setInt(4, shohin.getZaikoSuuryou());
-            stmt.setString(5, shohin.getShouhinGazou());
-            stmt.setString(6, oldShouhinMei);
+            stmt.setString(2, shohin.getCategoryName());
+            stmt.setString(3, shohin.getShouhinSetsumei());
+            stmt.setInt(4, shohin.getKakaku());
+            stmt.setInt(5, shohin.getZaikoSuuryou());
+            stmt.setString(6, shohin.getShouhinGazou());
+            stmt.setString(7, oldShouhinMei);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
