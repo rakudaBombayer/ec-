@@ -19,7 +19,7 @@
             <input type="password" name="pass" required><br>
             <input type="submit" value="ログイン">
             <!-- 会員登録ボタン -->
-            <a href="MenuServlet" class="register-button">ログイン(仮)メニュー画面へ</a>
+            
             <a href="RegisterServlet" class="register-button">会員登録(仮)へ</a>
         </form>
         <c:if test="${not empty successMessage}">

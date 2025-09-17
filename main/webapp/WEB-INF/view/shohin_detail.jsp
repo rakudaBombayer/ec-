@@ -16,7 +16,7 @@
         <c:choose>
             <c:when test="${not empty shohin}">
                 <h2>${shohin.shouhinMei}</h2>
-                <img src="${shohin.shouhinGazou}" alt="商品画像" class="shouhin_gazou"><br><br>
+                <img src="images/${shohin.shouhinGazou}" alt="商品画像" class="shouhin_gazou" width="150"><br>
                 <strong>価格:</strong> <fmt:formatNumber value="${shohin.kakaku}" type="number" /> 円<br>
                 <strong>在庫数:</strong> ${shohin.zaikoSuuryou} 個<br><br>
                 <strong>商品説明:</strong><br>
