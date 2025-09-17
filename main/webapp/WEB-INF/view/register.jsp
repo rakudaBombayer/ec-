@@ -57,7 +57,7 @@
 
 
 
-<a href="LoginServlet" class="register-button">ログイン画面へ(仮)</a>
+<a href="LoginServlet" class="register-button">ログイン画面へ</a>
 </body>
 </html>
 
@@ -85,3 +85,77 @@ document.getElementById("zipcode").addEventListener("blur", function() {
     }
 });
 </script>
+
+<style>
+    body {
+        font-family: 'Oswald', sans-serif, sans-serif;
+        background-color: #000000;
+        color: white;
+        padding: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    form {
+        max-width: 500px;
+        margin: auto;
+        background: #000000;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: white;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        display: block;
+        margin: 25px auto 0 auto;
+        width: 150px;
+        padding: 12px;
+        background-color: #ff0000;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #af0e0e;
+    }
+
+    a.register-button {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #FFFFFF;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a.register-button:hover {
+        text-decoration: underline;
+    }
+</style>

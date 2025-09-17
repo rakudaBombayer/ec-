@@ -11,22 +11,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>フィギュアショップ</h1>
+        <h1>バイク・ガンプラショップ</h1>
         <form action="LoginServlet" method="post">
             ユーザーID:<br>
             <input type="text" name="userId" required><br>
             パスワード:<br>
             <input type="password" name="pass" required><br>
-            <input type="submit" value="ログイン">
-            <!-- 会員登録ボタン -->
-            
-            <a href="RegisterServlet" class="register-button">会員登録(仮)へ</a>
+                     
+            <input type="submit" value="ログイン">          
         </form>
+        <a href="RegisterServlet" class="register-button">会員登録</a>
+        
         <c:if test="${not empty successMessage}">
     		<p style="color: blue;">${successMessage}</p>
 		</c:if>
 		<c:if test="${not empty errorMessage}">
-    		<p style="color: red;">${errorMessage}</p>
+    		<p style="color: white;">${errorMessage}</p>
 		</c:if>
     </div>
 </body>
@@ -37,7 +37,7 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background-color: #f2f2f2;
+            background-color: #000000;
         }
 
         .container {
@@ -51,45 +51,81 @@
         h1 {
             font-size: 36px;
             margin-bottom: 40px;
+             font-weight: bold;
+             color: white;
         }
 
         form {
-            background-color: white;
+            background-color: black;
             padding: 30px 40px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             text-align: center;
+             font-weight: bold;
+             color: white;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"] {
             width: 250px;
             padding: 10px;
-            margin: 10px 0;
+            margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
+            
         }
+        input[type="password"] {
+        	width: 250px;
+        	padding: 10px;
+		    margin-bottom: 20px; /* ← 下に余白を追加 */
+		    border: 1px solid #ccc;
+            border-radius: 4px;
+		}
+		        
 
         input[type="submit"], .register-button {
-            width: 100%;
+            width: 250px;
             padding: 10px;
-            margin-top: 15px;
-            background-color: #4CAF50;
+            box-sizing: border-box;
+            background-color: #ff0000; 
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+             font-weight: bold;
         }
+        
+        
 
         input[type="submit"]:hover,
         .register-button:hover {
-            background-color: #45a049;
+            background-color: #af0e0e;
+           
         }
-
+        
+		.button-group {
+    		display: flex;
+    		flex-direction: column;
+    		align-items: center;
+    		width: 100%;
+		}
+		
         .register-button {
-            margin-top: 10px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
+		    display: inline-block;
+		    width: 250px;
+		    padding: 10px;
+		    background-color: #ff0000;
+		    color: white;
+		    border: none;
+		    border-radius: 4px;
+		    font-size: 16px;
+		    font-weight: bold;
+		    text-align: center;
+		    text-decoration: none;
+		    cursor: pointer;
+		    box-sizing: border-box; /* ← これが重要！ */
+		    line-height: 1.5;        /* 高さの調整に有効 */
+		}
+
+
     </style>

@@ -16,7 +16,12 @@
 <a href="AccountChangeServlet" class="register-button">アカウント変更画面へ(仮)</a>
 <a href="CartListServlet" class="register-button">ショッピングカート画面へ(仮)</a>
 <a href="HistoryServlet" class="register-button">注文履歴画面へ(仮)</a>
+
+<!--アドミンユーザーのみ表示: 未実装-->
 <a href="AdminServlet" class="register-button">管理者用画面へ(仮)</a>
+<!--アドミンユーザーのみ表示: 未実装-->
+
+
     <form action="SearchServlet" method="get" class="search-form">
 			<!-- 商品名 -->
 			<input type="text" name="keyword" placeholder="商品名を入力">
