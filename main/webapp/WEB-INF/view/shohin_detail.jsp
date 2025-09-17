@@ -6,88 +6,135 @@
 <head>
     <meta charset="UTF-8">
     <title>商品詳細画面</title>
-
 </head>
 <body>
 
     <h1>商品詳細画面</h1>
 
-    <div class="product-detail">
-        <c:choose>
-            <c:when test="${not empty shohin}">
-                <h2>${shohin.shouhinMei}</h2>
-                <img src="images/${shohin.shouhinGazou}" alt="商品画像" class="shouhin_gazou" width="150"><br>
-                <strong>価格:</strong> <fmt:formatNumber value="${shohin.kakaku}" type="number" /> 円<br>
-                <strong>在庫数:</strong> ${shohin.zaikoSuuryou} 個<br><br>
-                <strong>商品説明:</strong><br>
-                <p>${shohin.shouhinSetsumei}</p>
-            </c:when>
-            <c:otherwise>
-                <p>商品情報が取得できませんでした。</p>
-            </c:otherwise>
-        </c:choose>
-    </div>
+<div class="product-detail">
+    <c:choose>
+        <c:when test="${not empty shohin}">
+            <div class="product-container">
+                <!-- 左：画像 -->
+                <div class="product-image">
+                    <img src="images/${shohin.shouhinGazou}" alt="商品画像" class="shouhin_gazou">
+                </div>
 
-    <div class="back-links">
-	<form action="CartServlet" method="post">
-	    <input type="hidden" name="shohin_id" value="${shohin.shohinId}">
-	    
-	    <label>数量:
-	        <input type="number" name="quantity" value="1" min="1" max="${shohin.zaikoSuuryou}">
-	    </label><br><br>
-	
-	    <button type="submit" class="register-button">カートに追加</button>
-	</form>
-	        <a href="CartListServlet" class="register-button">ショッピングカート画面へ</a>
-	        <a href="MenuServlet" class="register-button">メニューへ</a>
-	    </div>
-	
-	<c:if test="${not empty successMessage}">
-	    <p style="color: green;">${successMessage}</p>
-	</c:if>
-	
-	<c:if test="${not empty errorMessage}">
-	    <p style="color: red;">${errorMessage}</p>
-	</c:if>
+                <!-- 右：商品詳細 ＋ ボタン類 -->
+                <div class="product-right">
+                    <div class="product-info">
+                        <h2>${shohin.shouhinMei}</h2>
+                        <p><strong>価格:</strong> <fmt:formatNumber value="${shohin.kakaku}" type="number" /> 円</p>
+                        <p><strong>在庫数:</strong> ${shohin.zaikoSuuryou} 個</p>
+                        <p><strong>商品説明:</strong><br>${shohin.shouhinSetsumei}</p>
+                    </div>
+
+                    <!-- 商品情報の下に表示 -->
+                    <div class="back-links">
+                        <form action="CartServlet" method="post">
+                            <input type="hidden" name="shohin_id" value="${shohin.shohinId}">
+                            <label>数量:
+                                <input type="number" name="quantity" value="1" min="1" max="${shohin.zaikoSuuryou}">
+                            </label><br><br>
+                            <button type="submit" class="register-button">カートに追加</button>
+                        </form>
+                        <a href="CartListServlet" class="register-button">ショッピングカート画面へ</a>
+                        <a href="MenuServlet" class="register-button">メニューへ</a>
+                    </div>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <p>商品情報が取得できませんでした。</p>
+        </c:otherwise>
+    </c:choose>
+</div>
+
 
 
 </body>
 </html>
+<style>
+    body {
+        background-color: black;
+        font-family: sans-serif;
+        color: white;
+        font-weight: bold;
+    }
 
-    <style>
-        .product-detail {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            font-family: sans-serif;
-        }
+    .product-detail {
+        max-width: 2000px;
+        
+        padding: 20px;
+      
+    }
 
-        .product-image {
-            max-width: 300px;
-            height: auto;
-        }
+    .product-image {
+        max-width: 600px;
+        height: auto;
+    }
+.product-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: #222;
+    height: auto;
+    min-height: 0;
+}
 
-        .back-links {
-            margin-top: 20px;
-        }
+.product-image img {
+    max-width: 500px;
+    height: auto;
+    border: 1px solid #fff;
+}
 
-        .shouhin_gazou {
-            max-width: 300px;
-            height: auto;
-        }
+/* 右側のブロック（商品情報＋ボタン） */
+.product-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+     height: auto;
+}
 
-        .register-button {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
+.product-info {
+    text-align: left;
+    margin-bottom: 20px;
+}
 
-        .register-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+.product-info h2,
+.product-info p {
+    margin-bottom: 10px;
+}
+
+/* ボタンやフォームの位置調整 */
+.back-links {
+    text-align: left;
+}
+
+.back-links form {
+    margin-bottom: 10px;
+}
+
+label {
+    color: white;
+}
+
+.register-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.register-button:hover {
+    background-color: #af0e0e;
+}
+
+</style>

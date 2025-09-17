@@ -58,18 +58,20 @@
 <style>
         body {
             font-family: sans-serif;
-            background-color: #f9f9f9;
+            background-color: #000000;
             padding: 40px;
         }
 
         h2 {
+        
             text-align: center;
+             color: white;
         }
 
         form {
             max-width: 500px;
             margin: auto;
-            background: #fff;
+            background: #000000;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -78,6 +80,7 @@
         label {
             display: block;
             margin-top: 15px;
+            color: white;
         }
 
         input[type="text"],
@@ -93,19 +96,20 @@
         }
 
         input[type="submit"] {
-            margin-top: 25px;
-            width: 100%;
-            padding: 12px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+	    display: block;
+	    margin: 25px auto 0 auto; 
+	    width: 150px;             
+	    padding: 12px;
+	    background-color: #ff0000;
+	    border: none;
+	    color: white;
+	    font-size: 16px;
+	    border-radius: 4px;
+	    cursor: pointer;
+	}
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #af0e0e;
         }
 
         .message {
@@ -114,23 +118,24 @@
         }
 
        .success {
-    font-size: 1.5em; /* 1.5倍の大きさ */
-    color: green;     /* もし色も変えたい場合 */
-}
+	    font-size: 1.5em; /* 1.5倍の大きさ */
+	    color: white;     /* もし色も変えたい場合 */
+	}
 
-.error {
-    font-size: 1.5em;
-    color: red;
-}
+	.error {
+	    font-size: 1.5em;
+	    color: red;
+	}
 
 
         .back-link {
             text-align: center;
             margin-top: 30px;
+           
         }
 
         .back-link a {
-            color: #555;
+            color: #ffffff;
             text-decoration: none;
         }
 
