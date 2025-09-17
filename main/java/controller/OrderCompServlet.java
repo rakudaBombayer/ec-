@@ -85,6 +85,10 @@ public class OrderCompServlet extends HttpServlet {
         }
 
         // ✅ 完了画面へフォワード
+        request.setAttribute("cartList", cartList); // 購入商品一覧
+        request.setAttribute("totalPrice", total);  // 合計金額
+        request.setAttribute("shimei", shimei);     // 氏名など
+        request.setAttribute("orderTime", now);     // 注文日時
         request.getRequestDispatcher("/WEB-INF/view/order_comp.jsp").forward(request, response);
     }
 }

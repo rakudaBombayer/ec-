@@ -5,48 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>購入内容確認画面</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #999;
-            padding: 8px;
-            text-align: center;
-        }
-        .form-section {
-            margin-top: 30px;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        input[type="text"],
-        textarea {
-            width: 300px;
-            padding: 5px;
-        }
-        textarea {
-            height: 100px;
-        }
-        .register-button {
-            padding: 10px 20px;
-            background-color: #2b90d9;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .register-button:hover {
-            background-color: #1c6ca8;
-        }
-    </style>
+    
 </head>
 <body>
 
@@ -91,3 +50,46 @@
 
 </body>
 </html>
+
+<style>
+        body {
+            font-family: sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: center;
+        }
+        .form-section {
+            margin-top: 30px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        textarea {
+            width: 300px;
+            padding: 5px;
+        }
+        textarea {
+            height: 100px;
+        }
+        .register-button {
+            padding: 10px 20px;
+            background-color: #2b90d9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .register-button:hover {
+            background-color: #1c6ca8;
+        }
+    </style>

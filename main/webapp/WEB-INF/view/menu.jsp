@@ -35,7 +35,7 @@
     <c:forEach var="item" items="${shohinList}">
     <div class="item-box">
         <a href="ShohinDetailServlet?shohin_id=${item.shohinId}">
-            ${item.shouhinMei}${item.shohinId}
+            ${item.shouhinMei}
         </a>
         <p>${item.shouhinSetsumei}</p>
         <p>価格：${item.kakaku}円</p>

@@ -6,7 +6,56 @@
 <head>
     <meta charset="UTF-8">
     <title>会員情報変更画面</title>
-    <style>
+    
+</head>
+<body>
+
+<h2>会員情報変更</h2>
+<div class="message">
+    <c:if test="${not empty successMessage}">
+        <p class="success">${successMessage}</p>
+    </c:if>
+    <c:if test="${not empty errorMessage}">
+        <p class="error">${errorMessage}</p>
+    </c:if>
+</div>
+<form action="AccountChangeServlet" method="post">
+    <label>氏名:</label>
+    <input type="text" name="shimei" value="${account.shimei}" required>
+
+    <label>パスワード:</label>
+    <input type="password" name="password" value="${account.password}" required>
+
+    <label>郵便番号:</label>
+    <input type="text" name="yuubin_bangou" value="${account.yuubinBangou}">
+
+    <label>住所:</label>
+    <input type="text" name="address" value="${account.address}">
+
+    <label>電話番号:</label>
+    <input type="text" name="denwa_bangou" value="${account.denwaBangou}">
+
+    <label>生年月日:</label>
+    <input type="date" name="seinengappi" value="<fmt:formatDate value='${account.seinengappi}' pattern='yyyy-MM-dd'/>">
+
+    <label>メールアドレス:</label>
+    <input type="email" name="mail_address" value="${account.mailAddress}">
+
+    <label>支払い方法:</label>
+    <input type="text" name="shiharaiHouhou" value="${account.shiharaiHouhou}">
+    
+    <input type="submit" value="変更を保存">
+</form>
+
+<div class="back-link">
+    <a href="MenuServlet">← メニューに戻る</a>
+</div>
+
+</body>
+</html>
+
+
+<style>
         body {
             font-family: sans-serif;
             background-color: #f9f9f9;
@@ -89,49 +138,3 @@
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
-
-<h2>会員情報変更</h2>
-<div class="message">
-    <c:if test="${not empty successMessage}">
-        <p class="success">${successMessage}</p>
-    </c:if>
-    <c:if test="${not empty errorMessage}">
-        <p class="error">${errorMessage}</p>
-    </c:if>
-</div>
-<form action="AccountChangeServlet" method="post">
-    <label>氏名:</label>
-    <input type="text" name="shimei" value="${account.shimei}" required>
-
-    <label>パスワード:</label>
-    <input type="password" name="password" value="${account.password}" required>
-
-    <label>郵便番号:</label>
-    <input type="text" name="yuubin_bangou" value="${account.yuubinBangou}">
-
-    <label>住所:</label>
-    <input type="text" name="address" value="${account.address}">
-
-    <label>電話番号:</label>
-    <input type="text" name="denwa_bangou" value="${account.denwaBangou}">
-
-    <label>生年月日:</label>
-    <input type="date" name="seinengappi" value="<fmt:formatDate value='${account.seinengappi}' pattern='yyyy-MM-dd'/>">
-
-    <label>メールアドレス:</label>
-    <input type="email" name="mail_address" value="${account.mailAddress}">
-
-    <label>支払い方法:</label>
-    <input type="text" name="shiharaiHouhou" value="${account.shiharaiHouhou}">
-    
-    <input type="submit" value="変更を保存">
-</form>
-
-<div class="back-link">
-    <a href="MenuServlet">← メニューに戻る</a>
-</div>
-
-</body>
-</html>
