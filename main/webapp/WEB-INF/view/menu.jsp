@@ -7,10 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>メニュー画面</title>
-
+<link rel="stylesheet" type="text/css" href="css/menu.css">
 </head>
 <body>
-<h1>メニュー画面</h1>
+
+
+<div class="openbtn"><span></span><span></span><span></span></div>
+<nav id="g-nav">
+<div id="g-nav-list">
+<ul>
+<li><a href="LogoutServlet">Logout</a></li>	
+<li><a href="AccountChangeServlet">Account</a></li>	
+<li><a href="HistoryServlet">History</a></li>	
+<li><a href="AdminServlet">Admin</a></li>	
+</ul>
+</div>
+</nav>
+
+
+
+
 <div class="search-container">
 <a href="LogoutServlet" class="register-button">ログアウト(仮)</a>
 <a href="AccountChangeServlet" class="register-button">アカウント変更画面へ(仮)</a>
@@ -34,8 +50,8 @@
 				<option value="ガンダム">ガンダム</option>
 				<option value="書籍">書籍</option>
 			</select> <input type="submit" value="検索">
-		</form>
-    <div><a href="ShohinServlet">商品検索後の画面へ</a></div>
+	</form>
+    
 </div>
     <c:forEach var="item" items="${shohinList}">
     <div class="item-box">
@@ -48,6 +64,10 @@
     </div>
 	</c:forEach>
 
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/menu.js"></script>
 </body>
 </html>
 

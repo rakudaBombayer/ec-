@@ -12,6 +12,7 @@
     <h1>商品詳細画面</h1>
 
 <div class="product-detail">
+	
     <c:choose>
         <c:when test="${not empty shohin}">
             <div class="product-container">
@@ -38,6 +39,14 @@
                             </label><br><br>
                             <button type="submit" class="register-button">カートに追加</button>
                         </form>
+                        <c:if test="${not empty successMessage}">
+    						<p style="color: green;">${successMessage}</p>
+						</c:if>
+
+						<c:if test="${not empty errorMessage}">
+							    <p style="color: red;">${errorMessage}</p>
+						</c:if>
+					
                         <a href="CartListServlet" class="register-button">ショッピングカート画面へ</a>
                         <a href="MenuServlet" class="register-button">メニューへ</a>
                     </div>

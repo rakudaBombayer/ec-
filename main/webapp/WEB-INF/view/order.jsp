@@ -7,88 +7,90 @@
     <meta charset="UTF-8">
     <title>注文者情報確認</title>
    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #f9f9f9;
-            padding: 40px;
-        }
+body {
+	font-family: 'Oswald', sans-serif;
+	background-color: #000000;
+	padding: 40px;
+}
 
-        h2 {
-            text-align: center;
-        }
+h2 {
+	text-align: center;
+}
 
-        form {
-            max-width: 500px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+form {
+	max-width: 500px;
+	margin: auto;
+	background: #000000;
+	padding: 30px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-        label {
-            display: block;
-            margin-top: 15px;
-        }
+label {
+	display: block;
+	margin-top: 15px;
+	color: white;
+}
 
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="date"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+input[type="text"], input[type="password"], input[type="email"], input[type="date"],
+	select {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
 
-        input[type="submit"] {
-            margin-top: 25px;
-            width: 100%;
-            padding: 12px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+input[type="submit"] {
+	margin-top: 25px;
+	width: 30%;
+	padding: 12px;
+	background-color: #db433d;
+	border: none;
+	color: white;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+}
 
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+input[type="submit"]:hover {
+	background-color: #FF0000;
+}
 
-        .message {
-            text-align: center;
-            margin-top: 20px;
-        }
+.message {
+	text-align: center;
+	margin-top: 20px;
+}
 
-       .success {
-    font-size: 1.5em; /* 1.5倍の大きさ */
-    color: green;     /* もし色も変えたい場合 */
+.success {
+	font-size: 1.5em; /* 1.5倍の大きさ */
+	color: green; /* もし色も変えたい場合 */
 }
 
 .error {
-    font-size: 1.5em;
-    color: red;
+	font-size: 1.5em;
+	color: red;
 }
 
+.back-link {
+	text-align: center;
+	margin-top: 30px;
+}
 
-        .back-link {
-            text-align: center;
-            margin-top: 30px;
-        }
+.back-link a {
+	color: #555;
+	text-decoration: none;
+}
 
-        .back-link a {
-            color: #555;
-            text-decoration: none;
-        }
+.back-link a:hover {
+	text-decoration: underline;
+}
 
-        .back-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
+h2 {
+	color: white;
+}
+
+</style>
 </head>
 <body>
 
@@ -120,7 +122,9 @@
     <label>支払い方法:</label>
     <input type="text" name="shiharaiHouhou" value="${account.shiharaiHouhou}">
     
-    <input type="submit" value="次へ">
+    <div style="display: flex; justify-content: center;">
+			<input type="submit" value="次へ">
+		</div>
 </form>
 
 <div class="back-link">
