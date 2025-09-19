@@ -67,18 +67,20 @@
     
 </div>
 
-<!--  商品画像を4つずつ表示-->
+<!--  商品画像を3つずつ表示-->
 <div>SHOP</div>
 <div class="item-container">
     <c:forEach var="item" items="${shohinList}">
+    <a href="ShohinDetailServlet?shohin_id=${item.shohinId}" class="item-link">
     <div class="item-box">
-        <a href="ShohinDetailServlet?shohin_id=${item.shohinId}">
-  			<img src="images/${item.shouhinGazou}" alt="${item.shouhinMei}" width="150">
-		</a>
+        
+  		<img src="images/${item.shouhinGazou}" alt="${item.shouhinMei}" width="150">
+		
         <p class="js_typing_item">${item.shouhinMei}</p>
         <p class="js_typing_item">価格：${item.kakaku}円</p>
         
     </div>
+    </a>
 	</c:forEach>
 </div>
 
@@ -137,6 +139,12 @@
 		transform: translateY(30px);
 		transition: opacity 0.6s ease, transform 0.6s ease;
 	}
+	.item-box img {
+	  width: 100%;
+	  height: auto;
+	  object-fit: cover;
+	  border-radius: 8px;
+	}
 	.item-box.visible {
 	  opacity: 1;
 	  transform: translateY(0);
@@ -184,20 +192,12 @@
   z-index: 2;
   pointer-events: none;
 }
-/* .slider-text-shohin{
- position: absolute;
-  top: 60%;
-  left: 15%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-  z-index: 2;
-  pointer-events: none;
+.item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
-
-} */
 
 </style>
 
