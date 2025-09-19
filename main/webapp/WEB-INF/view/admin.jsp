@@ -26,7 +26,7 @@
         }
         input[type="text"],
         input[type="number"] {
-            width: 100%;
+            width: 550px;
             padding: 8px;
             margin-top: 4px;
         }

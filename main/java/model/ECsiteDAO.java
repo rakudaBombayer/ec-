@@ -300,7 +300,7 @@ public class ECsiteDAO {
     public List<CartItem> getCartList(int kaiinId) {
         List<CartItem> cartList = new ArrayList<>();
 
-        String sql = "SELECT sc.cart_id, sc.shohin_id, sc.quantity, s.shouhin_mei, s.kakaku " +
+        String sql = "SELECT sc.cart_id, sc.shohin_id, sc.quantity, s.shouhin_mei, s.kakaku, s.shouhin_gazou " +
                      "FROM shopping_cart sc JOIN shohin s ON sc.shohin_id = s.shohin_id " +
                      "WHERE sc.kaiin_id = ?";
 
@@ -317,6 +317,7 @@ public class ECsiteDAO {
                 item.setShohinMei(rs.getString("shouhin_mei"));
                 item.setKakaku(rs.getInt("kakaku"));
                 item.setQuantity(rs.getInt("quantity"));
+                item.setShohinGazou(rs.getString("shouhin_gazou"));
                 cartList.add(item);
             }
 
@@ -463,10 +464,9 @@ return success;
  // 注文履歴一覧を取得する
     public List<OrderHistory> getOrderHistoryByKaiinId(int kaiinId) {
         List<OrderHistory> historyList = new ArrayList<>();
-        String sql = "SELECT oh.order_time, oh.quantity, s.shouhin_mei, s.kakaku " +
+        String sql = "SELECT oh.order_time, oh.quantity, oh.shohin_id, s.shouhin_mei, s.kakaku, s.shouhin_gazou " + 
                 "FROM order_history oh JOIN shohin s ON oh.shohin_id = s.shohin_id " +
                 "WHERE oh.kaiin_id = ? ORDER BY oh.order_time DESC";
-
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -478,8 +478,10 @@ return success;
                 OrderHistory history = new OrderHistory();
                 history.setOrderTime(rs.getTimestamp("order_time"));
                 history.setQuantity(rs.getInt("quantity"));
+                history.setShohinId(rs.getInt("shohin_id"));
                 history.setShohinMei(rs.getString("shouhin_mei"));
                 history.setKakaku(rs.getInt("kakaku"));
+                history.setShohinGazou(rs.getString("shouhin_gazou"));
                 historyList.add(history);
             }
 
@@ -490,7 +492,11 @@ return success;
     }
     public List<CartItem> getOrderHistory(int kaiinId) {
         List<CartItem> list = new ArrayList<>();
-        String sql = "SELECT shohin_mei, kakaku, quantity, order_time FROM order_history WHERE kaiin_id = ?";
+        String sql = "SELECT s.shouhin_mei, s.kakaku, oh.quantity, oh.order_time " +
+                "FROM order_history oh " +
+                "JOIN shohin s ON oh.shohin_id = s.shohin_id " +
+                "WHERE oh.kaiin_id = ?";
+
         try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, kaiinId);

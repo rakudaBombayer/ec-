@@ -28,7 +28,8 @@ public class OrderHistoryServlet extends HttpServlet {
         ECsiteDAO dao = new ECsiteDAO();
         List<OrderHistory> historyList = dao.getOrderHistoryByKaiinId(loginUser.getKaiinId());
 
-        request.setAttribute("historyList", historyList);
+        request.setAttribute("orderHistory", historyList);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("history.jsp");
         dispatcher.forward(request, response);
     }

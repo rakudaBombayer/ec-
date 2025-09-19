@@ -9,6 +9,8 @@ public class OrderHistory {
     private int kakaku;
     private int quantity;
     private Timestamp orderTime;
+    private String shohinGazou;
+    private int shohinId;
 
     // getter/setter
     public int getHistoryId() { return historyId; }
@@ -28,4 +30,10 @@ public class OrderHistory {
 
     public Timestamp getOrderTime() { return orderTime; }
     public void setOrderTime(Timestamp orderTime) { this.orderTime = orderTime; }
+    
+    public String getShohinGazou() {return shohinGazou;}
+    public void setShohinGazou(String shohinGazou) {this.shohinGazou = shohinGazou;}
+    
+    public int getShohinId() { return shohinId; }
+    public void setShohinId(int shohinId) { this.shohinId = shohinId; }
 }

@@ -10,6 +10,7 @@ public class CartItem {
     private int quantity;
     private int zaikoSuuryou;
     private Date orderTime; 
+    private String shohinGazou;
     // ゲッター・セッター
     public int getCartId() { return cartId; }
     public void setCartId(int cartId) { this.cartId = cartId; }
@@ -34,8 +35,13 @@ public class CartItem {
     public Date getOrderTime() {
         return orderTime;
     }
-
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
+    }
+    public String getShohinGazou() {
+        return shohinGazou;
+    }
+    public void setShohinGazou(String shohinGazou) {
+        this.shohinGazou = shohinGazou;
     }
 }
