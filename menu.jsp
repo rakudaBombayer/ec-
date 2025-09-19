@@ -62,13 +62,14 @@
 				<option value="バイク１">バイク１</option>
 				<option value="ガンダム">ガンダム</option>
 				<option value="書籍">書籍</option>
-			</select> <input type="submit" value="検索">
+			</select> 
+			<input type="submit" value="検索">
 	</form>
     
 </div>
 
 <!--  商品画像を3つずつ表示-->
-<div>SHOP</div>
+<h2 class="js_typing_item">SHOP</h2>
 <div class="item-container">
     <c:forEach var="item" items="${shohinList}">
     <a href="ShohinDetailServlet?shohin_id=${item.shohinId}" class="item-link">
@@ -108,12 +109,7 @@
         padding: 20px;
     }
 
-    /* 検索フォームとカテゴリ選択を横並びにする */
-    .search-form {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* 要素の間隔 */
-    }
+
 
     input[type="text"] {
         width: 250px;
@@ -145,6 +141,10 @@
 	  object-fit: cover;
 	  border-radius: 8px;
 	}
+	.item-box p {
+  		font-weight: bold;
+	}
+
 	.item-box.visible {
 	  opacity: 1;
 	  transform: translateY(0);
@@ -198,6 +198,42 @@
   display: block;
 }
 
+.search-form {
+  background-color: #1a1a1a; /* ダークグレー背景 */
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* ほんのり影 */
+}
+
+.search-form input[type="text"],
+.search-form select,
+.search-form input[type="submit"] {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #333;
+  color: #fff;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.search-form input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+.search-form input[type="submit"] {
+  background-color: #444;
+  cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+  background-color: #ff0000;
+}
 
 </style>
 
