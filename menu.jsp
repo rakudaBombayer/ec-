@@ -141,7 +141,9 @@
 	  opacity: 1;
 	  transform: translateY(0);
 	}
-
+	.item-box:hover {
+  		transform: translateY(0) rotate(-5deg);
+	}
 .item-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 4列に分割 */
@@ -247,22 +249,29 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }, {
-    threshold: 0.3
+    threshold: 0.4
   });
   itemTextElements.forEach(el => textObserver.observe(el));
 
   // 商品ボックスのフェードイン
   const itemBoxes = document.querySelectorAll('.item-box');
-  const boxObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.3
-  });
+	let shownCount = 0; // 表示済みの数をカウント
+	
+	const boxObserver = new IntersectionObserver((entries, obs) => {
+	  entries.forEach(entry => {
+	    if (entry.isIntersecting) {
+	      // 遅延時間を表示順にずらす（例：100msずつ）
+	      setTimeout(() => {
+	        entry.target.classList.add('visible');
+	      }, shownCount * 300);
+	
+	      shownCount++; // 次の要素の遅延時間を増やす
+	      obs.unobserve(entry.target);
+	    }
+	  });
+	}, {
+	  threshold: 0.4
+	});
   itemBoxes.forEach(el => boxObserver.observe(el));
 });
 
