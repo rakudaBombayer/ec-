@@ -67,18 +67,20 @@
     
 </div>
 
-<!--  商品画像を4つずつ表示-->
-<div>SHOP</div>
+<!--  商品画像を3つずつ表示-->
+<h2>SHOP</h2>
 <div class="item-container">
     <c:forEach var="item" items="${shohinList}">
+    <a href="ShohinDetailServlet?shohin_id=${item.shohinId}" class="item-link">
     <div class="item-box">
-        <a href="ShohinDetailServlet?shohin_id=${item.shohinId}">
-  			<img src="images/${item.shouhinGazou}" alt="${item.shouhinMei}" width="150">
-		</a>
+        
+  		<img src="images/${item.shouhinGazou}" alt="${item.shouhinMei}" width="150">
+		
         <p class="js_typing_item">${item.shouhinMei}</p>
         <p class="js_typing_item">価格：${item.kakaku}円</p>
         
     </div>
+    </a>
 	</c:forEach>
 </div>
 
@@ -133,9 +135,27 @@
     	border-radius: 8px;             /* 角を丸く */
     	/* background-color: #f9f9f9;      /* 背景色（任意） */ */
     	box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* ほんのり影（任意） */
-}
+    	opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.6s ease, transform 0.6s ease;
+	}
+	.item-box img {
+	  width: 100%;
+	  height: auto;
+	  object-fit: cover;
+	  border-radius: 8px;
+	}
+	.item-box p {
+  		font-weight: bold;
+	}
 
-
+	.item-box.visible {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+	.item-box:hover {
+  		transform: translateY(0) rotate(-5deg);
+	}
 .item-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 4列に分割 */
@@ -176,24 +196,17 @@
   z-index: 2;
   pointer-events: none;
 }
-/* .slider-text-shohin{
- position: absolute;
-  top: 60%;
-  left: 15%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-  z-index: 2;
-  pointer-events: none;
+.item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
-
-} */
 
 </style>
 
 <script>
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // スライダー画像の切り替え
@@ -216,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(() => {
     currentIndex = (currentIndex + 1) % images.length;
     img.src = images[currentIndex];
-  }, 2000); // 2秒ごとに切り替え
+  }, 2000);
 
   // ファーストビューの文字は即アニメーション
   const topElements = document.querySelectorAll('.js_typing_top');
@@ -227,8 +240,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 商品一覧の文字はスクロールしてから1秒後にアニメーション
-  const itemElements = document.querySelectorAll('.js_typing_item');
-  const observer = new IntersectionObserver((entries, obs) => {
+  const itemTextElements = document.querySelectorAll('.js_typing_item');
+  const textObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         setTimeout(() => {
@@ -240,11 +253,32 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }, {
-    threshold: 0.1
+    threshold: 0.4
   });
+  itemTextElements.forEach(el => textObserver.observe(el));
 
-  itemElements.forEach(el => observer.observe(el));
+  // 商品ボックスのフェードイン
+  const itemBoxes = document.querySelectorAll('.item-box');
+	let shownCount = 0; // 表示済みの数をカウント
+	
+	const boxObserver = new IntersectionObserver((entries, obs) => {
+	  entries.forEach(entry => {
+	    if (entry.isIntersecting) {
+	      // 遅延時間を表示順にずらす（例：100msずつ）
+	      setTimeout(() => {
+	        entry.target.classList.add('visible');
+	      }, shownCount * 300);
+	
+	      shownCount++; // 次の要素の遅延時間を増やす
+	      obs.unobserve(entry.target);
+	    }
+	  });
+	}, {
+	  threshold: 0.4
+	});
+  itemBoxes.forEach(el => boxObserver.observe(el));
 });
+
 
 </script>
 
