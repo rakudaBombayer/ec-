@@ -33,8 +33,8 @@
 <div id="slider-area" class="bgextend bgRLextendTrigger">
     <div class="bgappearTrigger">
         <div id="slider">
-        	<div class="slider-text js_typing">BIKE AND GUNPLA </div>
-        	<div class="slider-text-under js_typing"> EC SHOP</div>
+        	<div class="slider-text js_typing_top">BIKE AND GUNPLA </div>
+        	<div class="slider-text-under js_typing_top"> EC SHOP</div>
         </div>
     </div>  
 </div>
@@ -72,13 +72,11 @@
 <div class="item-container">
     <c:forEach var="item" items="${shohinList}">
     <div class="item-box">
-
         <a href="ShohinDetailServlet?shohin_id=${item.shohinId}">
   			<img src="images/${item.shouhinGazou}" alt="${item.shouhinMei}" width="150">
 		</a>
-        <p>${item.shouhinMei}</p>
-        <p>${item.shouhinSetsumei}</p>
-        <p>価格：${item.kakaku}円</p>
+        <p class="js_typing_item">${item.shouhinMei}</p>
+        <p class="js_typing_item">価格：${item.kakaku}円</p>
         
     </div>
 	</c:forEach>
@@ -178,54 +176,76 @@
   z-index: 2;
   pointer-events: none;
 }
+/* .slider-text-shohin{
+ position: absolute;
+  top: 60%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+  z-index: 2;
+  pointer-events: none;
+
+
+} */
 
 </style>
 
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
-	  const slider = document.getElementById("slider");
+  // スライダー画像の切り替え
+  const slider = document.getElementById("slider");
+  const images = [
+    "images/Ggundam.jpg",
+    "images/gyakusyuugundam.jpg",
+    "images/SeedDestinygundam.jpg",
+    "images/UCgundam.jpg",
+    "images/Wgundam.jpg"
+  ];
+  let currentIndex = 0;
+  const img = document.createElement("img");
+  img.src = images[currentIndex];
+  img.alt = "スライダー画像";
+  img.style.width = "100%";
+  img.style.height = "auto";
+  slider.appendChild(img);
 
-	  const images = [
-	    "images/Ggundam.jpg",
-	    "images/gyakusyuugundam.jpg",
-	    "images/SeedDestinygundam.jpg",
-	    "images/UCgundam.jpg",
-	    "images/Wgundam.jpg"
-	  ];
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % images.length;
+    img.src = images[currentIndex];
+  }, 2000); // 2秒ごとに切り替え
 
-	  let currentIndex = 0;
+  // ファーストビューの文字は即アニメーション
+  const topElements = document.querySelectorAll('.js_typing_top');
+  topElements.forEach(el => {
+    const shuffle = new ShuffleText(el);
+    shuffle.duration = 3000;
+    shuffle.start();
+  });
 
-	  const img = document.createElement("img");
-	  img.src = images[currentIndex];
-	  img.alt = "スライダー画像";
-	  img.style.width = "100%";
-	  img.style.height = "auto";
-	  slider.appendChild(img);
+  // 商品一覧の文字はスクロールしてから1秒後にアニメーション
+  const itemElements = document.querySelectorAll('.js_typing_item');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          const shuffle = new ShuffleText(entry.target);
+          shuffle.duration = 3000;
+          shuffle.start();
+        }, 200);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
 
-	  setInterval(() => {
-	    currentIndex = (currentIndex + 1) % images.length;
-	    img.src = images[currentIndex];
-	  }, 2000); // 2秒ごとに切り替え
-
-/*  	  	const el = document.querySelector('.js_typing');
-	    const shuffle = new ShuffleText(el);
-	    shuffle.duration = 3000;
-	    shuffle.start();  */
-
-	    const elements = document.querySelectorAll('.js_typing');
-
-	    elements.forEach(el => {
-	      const shuffle = new ShuffleText(el);
-	      shuffle.duration = 3000;
-	      shuffle.start();
-	    });
-	    	   	 
-	});
-
-
-/* お試し */
-
-		
+  itemElements.forEach(el => observer.observe(el));
+});
 
 </script>
+
+
