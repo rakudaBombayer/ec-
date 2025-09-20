@@ -14,3 +14,29 @@
 
 
 
+const itemTextElements = document.querySelectorAll('.js_typing_item');
+let textCount = 0;　//← ここが変更された遅延時間のロジック
+
+const textObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        const shuffle = new ShuffleText(entry.target);
+        shuffle.duration = 3000;
+        shuffle.start();
+      }, textCount * 100); // 0.1秒ずつ遅延　// ← ここが変更された遅延時間のロジック
+
+      textCount++; // 次の要素の遅延時間を増やす　// ← ここが変更された遅延時間のロジック
+      obs.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.4
+});
+
+itemTextElements.forEach(el => textObserver.observe(el));
+
+
+let textCount = 0;
+
+https://copilot.microsoft.com/chats/BBxvz2MUwPPDNmD25R418
