@@ -8,6 +8,8 @@
 メニュー画面をシングルページにできるか？
 メニュー画面のレイアウトから始める。
 
+管理者画面を、メニューの表示のようにして商品を編集削除できるようにしても良かった。
+
 （管理者のみアドミンを表示を忘れずに）
 
 検索バーのレイアウト
@@ -40,4 +42,5 @@ itemTextElements.forEach(el => textObserver.observe(el));
 let textCount = 0;
 
 https://copilot.microsoft.com/chats/BBxvz2MUwPPDNmD25R418
+
 
