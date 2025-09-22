@@ -80,7 +80,7 @@
         .back-links form {
             margin-bottom: 10px;
         }
-
+h1{text-shadow: 0 0 10px red, 0 0 20px crimson;}
         label {
             color: white;
             font-weight: bold;
@@ -129,13 +129,7 @@
                             <p><strong>在庫数:</strong> ${shohin.zaikoSuuryou} 個</p>
                             <p><strong>商品説明:</strong><br>${shohin.shouhinSetsumei}</p>
                         </div>
-						<!-- メッセージ -->
-				        <c:if test="${not empty successMessage}">
-				            <p style="color: #00ffff;">${successMessage}</p>
-				        </c:if>
-				        <c:if test="${not empty errorMessage}">
-				            <p style="color: #ff6666;">${errorMessage}</p>
-				        </c:if>
+
                         <!-- 商品情報の下に表示 -->
                         <div class="back-links">
                             <form action="CartServlet" method="post">

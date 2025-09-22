@@ -232,6 +232,7 @@ public class ECsiteDAO {
                 account.setSeinengappi(rs.getDate("seinengappi"));
                 account.setMailAddress(rs.getString("mail_address"));
                 account.setShiharaiHouhou(rs.getString("shiharai_houhou"));
+                account.setAdmin(rs.getString("is_admin").equals("t"));
                 return account;
             }
 
@@ -240,7 +241,6 @@ public class ECsiteDAO {
         }
         return null;
     }
-
     public Account getAccountByNameAndPassword(String shimei, String password) {
         String sql = "SELECT * FROM account WHERE shimei = ? AND password = ?";
         
@@ -317,7 +317,7 @@ public class ECsiteDAO {
                 item.setShohinMei(rs.getString("shouhin_mei"));
                 item.setKakaku(rs.getInt("kakaku"));
                 item.setQuantity(rs.getInt("quantity"));
-                item.setShohinGazou(rs.getString("shouhin_gazou"));
+                item.setShouhinGazou(rs.getString("shouhin_gazou"));
                 cartList.add(item);
             }
 
@@ -599,5 +599,77 @@ return success;
         }
         return list;
     }
+    
+    //------ ↓ 購入済み商品
+    public List<CartItem> getPurchasedItemsByKaiinId(int kaiinId) {
+        List<CartItem> purchasedList = new ArrayList<>();
+
+        String sql = "SELECT s.shohin_id, s.shouhin_mei, s.kakaku, s.shouhin_gazou, oh.quantity, oh.order_time " +
+                     "FROM order_history oh " +
+                     "JOIN shohin s ON oh.shohin_id = s.shohin_id " +
+                     "WHERE oh.kaiin_id = ? " +
+                     "ORDER BY oh.order_time DESC";
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, kaiinId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                CartItem item = new CartItem();
+                item.setShohinId(rs.getInt("shohin_id"));
+                item.setShohinMei(rs.getString("shouhin_mei"));
+                item.setKakaku(rs.getInt("kakaku"));
+                item.setQuantity(rs.getInt("quantity"));
+                item.setShouhinGazou(rs.getString("shohin_gazou"));  //---setShouhinGazou に修正した
+                item.setOrderTime(rs.getTimestamp("order_time"));
+
+                purchasedList.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return purchasedList;
+    }
+    
+    //------ ↑ 購入済み商品
+    
+    /** 
+     * 商品IDに対応するサブ画像リストを取得する
+     */
+    public List<String> getPicsByShohinId(int shohinId) {
+        List<String> pics = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+            String sql = "SELECT pic FROM t_pic WHERE shohin_id = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, shohinId);
+
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    pics.add(rs.getString("pic"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pics;
+    }    
+    public int getCartTotalQuantity(int kaiinId) {
+        String sql = "SELECT SUM(quantity) AS total_items FROM shopping_cart WHERE kaiin_id = ?";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, kaiinId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total_items");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+        
 
 }
